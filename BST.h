@@ -15,16 +15,27 @@ private:
 	
 	//nested struct for type for the tree nodes
 	struct treeNode {
-		T data;
+		T key;
 		pTreeNode left;
 		pTreeNode right;
-		treeNode(T data) : data(data), left(nullptr), right(nullptr) {}
+		treeNode(T key) : key(key), left(nullptr), right(nullptr) {}
 	};
 
 	pTreeNode root;
 
-public:
+	//auxiliary method to recursively insert into the BST
+	void insertRecursively(pTreeNode, const T&);
 
+public:
+ 
+	BST();
+	BST(const T&);
+
+	//make it unable to copy a BST
+	BST(const BST&) = delete;
+	BST& operator=(const BST&) = delete;
+	~BST();
+	
 	//insert item of type T into the tree if it is not already in the tree
 	void insert(const T&);
 

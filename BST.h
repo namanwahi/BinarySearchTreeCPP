@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <iostream>
 
 //binary search tree class
 template <class T>
@@ -24,7 +25,10 @@ private:
 	pTreeNode root;
 
 	//auxiliary method to recursively insert into the BST
-	void insertRecursively(pTreeNode, const T&);
+	void insertRecursively(pTreeNode&, const T&);
+
+	//auxiliary method to recursively print the tree
+	void printTreeRecursively(pTreeNode&, std::ostream&, int depth = 0);
 
 public:
  
@@ -34,7 +38,7 @@ public:
 	//make it unable to copy a BST
 	BST(const BST&) = delete;
 	BST& operator=(const BST&) = delete;
-	~BST();
+	~BST() {}
 	
 	//insert item of type T into the tree if it is not already in the tree
 	void insert(const T&);
@@ -45,8 +49,9 @@ public:
 	//returns true if the tree contains the item of type T
 	bool contains(const T&);
 
-	//converts tree into string form for testing
-	std::string toString();
+	//inserts tree into an output stream for testing
+	void printTree(std::ostream&);
+	
 };
 
 #endif

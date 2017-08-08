@@ -50,6 +50,15 @@ void BST<T>::printTreeRecursively(pTreeNode& node, std::ostream& os, int depth) 
 	os << node->key  << std::endl;
 
 	depth++;
+
+	
+ 	if (node->right) {
+		for (int i = 0 ; i < depth ; i++)
+			os << "\t";
+
+		os << "R:";
+		printTreeRecursively(node->right, os, depth);
+	}
 	
 	if (node->left) {
 		for (int i = 0 ; i < depth ; i++)
@@ -59,13 +68,6 @@ void BST<T>::printTreeRecursively(pTreeNode& node, std::ostream& os, int depth) 
 		printTreeRecursively(node->left, os, depth);
 	}
 
- 	if (node->right) {
-		for (int i = 0 ; i < depth ; i++)
-			os << "\t";
-
-		os << "R:";
-		printTreeRecursively(node->right, os, depth);
-	}
 }
 
 //explicit instantiation  of the types that the tree will be used for

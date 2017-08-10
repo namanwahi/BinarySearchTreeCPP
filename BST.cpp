@@ -47,6 +47,10 @@ void BST<T>::printTree(std::ostream& os) {
 
 template <class T>
 void BST<T>::printTreeRecursively(pTreeNode& node, std::ostream& os, int depth) {
+	//if the depth is 0 then show it is a root
+	if (!depth) {
+		os << "ROOT:";
+	}
 	os << node->key  << std::endl;
 
 	depth++;
@@ -68,6 +72,30 @@ void BST<T>::printTreeRecursively(pTreeNode& node, std::ostream& os, int depth) 
 		printTreeRecursively(node->left, os, depth);
 	}
 
+}
+
+template <class T>
+bool BST<T>::contains(const T& key) {
+	return contains(root, key);
+}
+
+template <class T>
+bool BST<T>::contains(pTreeNode& node, const T& search_key) {
+	//if node is null then the search key is not in the tree
+	if (!node){
+		return false;
+	}
+
+	//if node key is equal to the search key then the tree contains the search key
+	if (node->key == search_key) {
+		return true;
+	} else if (search_key < node->key) {
+		//search left subtree
+		return contains(node->left, search_key);
+	} else { //search_key > node->key
+		//insert into right subtree
+		return contains(node->right, search_key);
+	}
 }
 
 //explicit instantiation  of the types that the tree will be used for

@@ -30,6 +30,9 @@ private:
 	//auxiliary method to recursively print the tree
 	void printTreeRecursively(pTreeNode&, std::ostream&, int depth = 0);
 
+	//auxiliary method to recursively traverse the tree to find an element
+	bool contains(pTreeNode&, const T&);
+
 public:
  
 	BST();

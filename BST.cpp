@@ -98,6 +98,82 @@ bool BST<T>::contains(pTreeNode& node, const T& search_key) {
 	}
 }
 
+template <class T>
+void BST<T>::remove(const T& key_to_remove) {
+	remove(root, key_to_remove);
+}
+
+template <class T>
+void BST<T>::remove(pTreeNode& node, const T& key_to_remove) {
+	//if node is null do nothing
+	if (!node) {
+		return;
+	}
+
+	//if node key is equal to the search key then remove the node from the tree
+	if (node->key == key_to_remove) {
+		removeNode(node);
+	} else if (key_to_remove < node->key) {
+		//search left subtree
+		remove(node->left, key_to_remove);
+	} else { //key_to_remove > node->key
+		//search right subtree
+		remove(node->right, key_to_remove);
+	}
+}
+
+template <class T>
+void BST<T>::removeNode(pTreeNode& node) {
+	
+	if (!(node->left) && !(node->right)) {
+		//if this node has no children, simply delete it
+		node = nullptr;
+	} else if (node->left && !(node->right)) {
+		//the node has a left child only
+		node = node->left;
+		
+	} else if (node->left && !(node->right)) {
+		//the node has a right child only
+		node = node->right;
+		
+	} else {
+		//node has 2 children
+
+		//create replacement node
+		pTreeNode replacement(findMinNode(node->right));
+		replacement->right = removeMinNode(node->right);
+ 		replacement->left = node->left;
+	  node = replacement;
+	}
+		
+}
+
+template <class T>
+typename BST<T>::pTreeNode& BST<T>::findMinNode(pTreeNode& node) {
+	if (!(node->left)) {
+		return node;
+	} else {
+		return findMinNode(node->left);
+	}
+}
+
+template <class T>
+typename BST<T>::pTreeNode& BST<T>::removeMinNode(pTreeNode& node) {
+	if (!(node->left)) {
+		return node->right;
+	} else {
+		node->left = removeMinNode(node->left);
+		return node;
+	}
+}
+
+template <class T>
+void BST<T>::clear() {
+	while(root) {
+		remove(root->key);
+	}
+}
+
 //explicit instantiation  of the types that the tree will be used for
 template class BST<std::string>;
 template class BST<int>;

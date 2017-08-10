@@ -12,7 +12,7 @@ class BST {
 private:
 
 	struct treeNode;
-	typedef std::unique_ptr<treeNode> pTreeNode;
+	typedef std::shared_ptr<treeNode> pTreeNode;
 	
 	//nested struct for type for the tree nodes
 	struct treeNode {
@@ -32,6 +32,18 @@ private:
 
 	//auxiliary method to recursively traverse the tree to find an element
 	bool contains(pTreeNode&, const T&);
+
+	//traverses the tree to find the node we which to remove
+	void remove(pTreeNode&, const T&);
+
+	//removes an individual node once it has been found
+	void removeNode(pTreeNode&);
+
+	//find the leftmost child from the node
+	pTreeNode& findMinNode(pTreeNode&);
+
+	//delete min node from the current node
+	pTreeNode& removeMinNode(pTreeNode&);
 
 public:
  
@@ -54,6 +66,9 @@ public:
 
 	//inserts tree into an output stream for testing
 	void printTree(std::ostream&);
+
+	//clears every element in the tree
+	void clear();
 	
 };
 

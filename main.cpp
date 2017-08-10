@@ -36,6 +36,9 @@ int main() {
 						<< bst_string.contains("Andrew") << bst_string.contains("Beatrice") << bst_string.contains("Henry")
 						<< bst_string.contains("Naman") << bst_string.contains("Kevin") << bst_string.contains("William")
 						<< std::endl;;
-	
+	bst_string.remove("Jane");
+	bst_string.printTree(std::cout);
+	bst_string.clear();
+	bst_string.printTree(std::cout);
   return 0;
 }
